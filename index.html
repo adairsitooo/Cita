@@ -19,12 +19,15 @@
     <div id="love-card" class="card hidden">
         <div class="heart-icon">❤️</div>
         <h1>¡Sabía que dirías que sí!</h1>
-        <p class="subtitle">Propón los detalles para nuestra cita:</p>
+        <p class="subtitle">Detalles de nuestra cita:</p>
         
         <form id="details-form">
             <div class="input-group">
-                <label for="lugar">¿A dónde te gustaría ir?</label>
-                <input type="text" id="lugar" placeholder="Ej: Un café, el cine, restaurante..." required>
+                <label for="lugar">¿A dónde iremos?</label>
+                <div class="input-row">
+                    <input type="text" id="lugar" placeholder="Ej: Antigua Guatemala" required>
+                    <button type="button" id="btn-open-maps" class="btn-geo" title="Buscar en Google Maps">🗺️</button>
+                </div>
             </div>
             
             <div class="input-group">
@@ -37,7 +40,7 @@
                 <input type="time" id="hora" required>
             </div>
             
-            <button type="submit" id="btn-send" class="btn">Enviar detalles por WhatsApp</button>
+            <button type="submit" id="btn-send" class="btn">Confirmar en WhatsApp</button>
         </form>
     </div>
 
