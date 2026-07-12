@@ -5,21 +5,23 @@ const loveCard = document.getElementById('love-card');
 const detailsForm = document.getElementById('details-form');
 const btnOpenMaps = document.getElementById('btn-open-maps');
 
-// === 1. LÓGICA DEL BOTÓN "NO" DESBUGEADA ===
+// === 1. LÓGICA DEL BOTÓN "NO" INTERNA EN LA CAJA ===
 function moverBoton(e) {
-    if (e) e.preventDefault(); // Detiene cualquier comportamiento raro del celular
+    if (e) e.preventDefault(); 
 
     if (btnNo.style.position !== 'absolute') {
         btnNo.style.position = 'absolute';
     }
 
-    const padding = 20; 
-    const maxX = window.innerWidth - btnNo.offsetWidth - padding;
-    const maxY = window.innerHeight - btnNo.offsetHeight - padding;
+    // Usamos el tamaño de la tarjeta (proposalCard) en lugar de la pantalla completa
+    const padding = 15; 
+    const maxX = proposalCard.clientWidth - btnNo.offsetWidth - padding;
+    const maxY = proposalCard.clientHeight - btnNo.offsetHeight - padding;
 
-    const limiteX = maxX > padding ? maxX : window.innerWidth - padding;
-    const limiteY = maxY > padding ? maxY : window.innerHeight - padding;
+    const limiteX = maxX > padding ? maxX : padding;
+    const limiteY = maxY > padding ? maxY : padding;
 
+    // Coordenadas aleatorias pero atrapadas dentro de la tarjeta blanca
     const randomX = Math.floor(Math.random() * (limiteX - padding)) + padding;
     const randomY = Math.floor(Math.random() * (limiteY - padding)) + padding;
 
@@ -27,7 +29,6 @@ function moverBoton(e) {
     btnNo.style.top = `${randomY}px`;
 }
 
-// Separación limpia de eventos para evitar ejecuciones dobles en iOS/Android
 btnNo.addEventListener('touchstart', moverBoton, { passive: false });
 btnNo.addEventListener('mouseover', moverBoton);
 
@@ -43,7 +44,7 @@ btnOpenMaps.addEventListener('click', () => {
     window.open('https://www.google.com/maps', '_blank');
 });
 
-// === 4. RECOLECTAR DATOS Y ENVIAR AL WHATSAPP ===
+// === 4. ENVIAR RESPUESTA A WHATSAPP ===
 detailsForm.addEventListener('submit', (e) => {
     e.preventDefault(); 
 
@@ -54,16 +55,14 @@ detailsForm.addEventListener('submit', (e) => {
     const mensajePersonal = document.getElementById('mensaje-personal').value;
 
     const tuTelefono = "50248012050"; 
-
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // NUEVA FRASE ACTUALIZADA: Dedicada a Adairsito
+    // NUEVO MENSAJE SOLICITADO
     const mensaje = `Obvio que saldré contigo, como decirle no a Adairsito 🥰\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
     const urlWhatsApp = `https://api.whatsapp.com/send?phone=${tuTelefono}&text=${mensajeCodificado}`;
 
-    // Enlace invisible infalible para saltarse bloqueos de GitHub Pages / Localhost
     const enlaceInvisible = document.createElement('a');
     enlaceInvisible.href = urlWhatsApp;
     enlaceInvisible.target = '_self'; 
@@ -72,6 +71,7 @@ detailsForm.addEventListener('submit', (e) => {
     enlaceInvisible.click(); 
     document.body.removeChild(enlaceInvisible);
 });
+
 
 
 
