@@ -19,25 +19,37 @@
     <div id="love-card" class="card hidden">
         <div class="heart-icon">❤️</div>
         <h1>¡Sabía que dirías que sí!</h1>
-        <p class="subtitle">Detalles de nuestra cita:</p>
+        <p class="subtitle">Armemos nuestro plan ideal:</p>
         
         <form id="details-form">
             <div class="input-group">
-                <label for="lugar">¿A dónde iremos?</label>
+                <label for="actividad">¿Qué te gustaría hacer?</label>
+                <input type="text" id="actividad" placeholder="Ej: Comer pizza, ir al cine..." required>
+            </div>
+
+            <div class="input-group">
+                <label for="lugar">Lugar (Google Maps)</label>
                 <div class="input-row">
                     <input type="text" id="lugar" placeholder="Ej: Antigua Guatemala" required>
                     <button type="button" id="btn-open-maps" class="btn-geo" title="Buscar en Google Maps">🗺️</button>
                 </div>
             </div>
             
-            <div class="input-group">
-                <label for="fecha">¿Qué día?</label>
-                <input type="date" id="fecha" required>
+            <div class="input-row-double">
+                <div class="input-group">
+                    <label for="fecha">¿Qué día?</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hora">¿A qué hora?</label>
+                    <input type="time" id="hora" required>
+                </div>
             </div>
-            
+
             <div class="input-group">
-                <label for="hora">¿A qué hora?</label>
-                <input type="time" id="hora" required>
+                <label for="mensaje-personal">Tu mensaje para mí</label>
+                <textarea id="mensaje-personal" placeholder="Escribe lo que quieras decirme..." rows="2" required></textarea>
             </div>
             
             <button type="submit" id="btn-send" class="btn">Confirmar en WhatsApp</button>
@@ -47,3 +59,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
