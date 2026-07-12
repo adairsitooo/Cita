@@ -28,7 +28,6 @@ body {
     width: 100%;
     max-width: 360px;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    position: relative; /* Crucial para que el botón NO se quede dentro de la caja */
     z-index: 10;
     max-height: 95vh;
     overflow-y: auto;
@@ -54,7 +53,6 @@ h1 {
     gap: 15px;
     align-items: center;
     min-height: 60px;
-    position: relative;
 }
 
 .btn {
@@ -77,9 +75,9 @@ h1 {
     background-color: #edf2f7;
     color: #4a5568;
     border: 1px solid #e2e8f0;
-    z-index: 1000;
-    transition: left 0.15s ease-out, top 0.15s ease-out; 
-    touch-action: none; /* Bloquea el scroll del celular al intentar tocarlo */
+    /* Suavizado para que se note el desplazamiento por toda la pantalla */
+    transition: left 0.2s ease-out, top 0.2s ease-out; 
+    touch-action: none; 
 }
 
 /* Formulario */
@@ -117,7 +115,7 @@ h1 {
     outline: none;
     background-color: #fff;
     resize: none;
-    -webkit-appearance: none; /* Reseteo visual para iOS Safari */
+    -webkit-appearance: none; 
 }
 
 .input-group input:focus, .input-group textarea:focus {
@@ -176,6 +174,8 @@ h1 {
     0% { opacity: 0; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
 }
+
+
 
 
 
