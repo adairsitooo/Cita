@@ -40,7 +40,6 @@ btnYes.addEventListener('click', () => {
 
 // === 3. ASISTENTE DE GOOGLE MAPS ===
 btnOpenMaps.addEventListener('click', () => {
-    // Abre Google Maps en una pestaña nueva para que la persona pueda ver o buscar el lugar fácilmente
     window.open('https://www.google.com/maps', '_blank');
 });
 
@@ -48,21 +47,25 @@ btnOpenMaps.addEventListener('click', () => {
 detailsForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // Captura de los nuevos campos incorporados
+    const actividad = document.getElementById('actividad').value;
     const lugar = document.getElementById('lugar').value;
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
+    const mensajePersonal = document.getElementById('mensaje-personal').value;
 
     const tuTelefono = "50248012050"; 
 
-    // Generamos un enlace de búsqueda directa en Google Maps con el sitio que escribieron
+    // Genera un enlace de búsqueda directa y oficial en Google Maps con lo que ella escribió
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // Mensaje ultra-minimalista solicitado
-    const mensaje = `¡Cita Confirmada! 🥂\n\n📍 Lugar: ${lugar}\n🗺️ Mapa: ${enlaceGoogleMaps}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}`;
+    // Estructura del mensaje limpio y minimalista
+    const mensaje = `¡Cita Confirmada! 🥂\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n🗺️ Mapa: ${enlaceGoogleMaps}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n\n💬 Mensaje: ${mensajePersonal}`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
     const urlWhatsApp = `https://api.whatsapp.com/send?phone=${tuTelefono}&text=${mensajeCodificado}`;
 
-    // Redirección directa sin bloqueos de localhost
+    // Redirección directa sin bloqueos
     window.location.href = urlWhatsApp;
 });
+
