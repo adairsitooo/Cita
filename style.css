@@ -80,6 +80,8 @@ h1 {
     border: 1px solid #e2e8f0;
     z-index: 1000;
     transition: left 0.2s ease-out, top 0.2s ease-out; 
+    /* SOLUCIÓN AL BUG: Evita que el celular interfiera con el arrastre o selección del botón */
+    touch-action: none; 
 }
 
 /* Formulario */
@@ -107,10 +109,15 @@ h1 {
     width: 100%;
 }
 
+/* SOLUCIÓN AL AMONTONAMIENTO: Distribución proporcional perfecta */
 .input-row-double {
     display: flex;
     gap: 10px;
     width: 100%;
+}
+
+.input-row-double .input-group {
+    flex: 1; /* Hace que fecha y hora midan exactamente el 50% cada uno */
 }
 
 .input-group input, .input-group textarea {
@@ -125,7 +132,6 @@ h1 {
     resize: none;
 }
 
-/* Caja de mensaje más estilizada y cómoda */
 .input-group textarea {
     font-family: inherit;
     line-height: 1.4;
@@ -136,7 +142,6 @@ h1 {
     box-shadow: 0 0 0 2px rgba(255, 75, 110, 0.1);
 }
 
-/* Botón de Google Maps más claro */
 .btn-geo {
     padding: 0 15px;
     background-color: #e2e8f0;
@@ -160,10 +165,7 @@ h1 {
     color: white;
     margin-top: 5px;
     box-shadow: 0 5px 12px rgba(37, 211, 102, 0.2);
-    transition: background-color 0.2s;
 }
-
-#btn-send:hover { background-color: #20ba5a; }
 
 .hidden { display: none !important; }
 
@@ -193,6 +195,7 @@ h1 {
     0% { opacity: 0; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
 }
+
 
 
 
