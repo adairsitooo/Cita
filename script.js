@@ -5,9 +5,9 @@ const loveCard = document.getElementById('love-card');
 const detailsForm = document.getElementById('details-form');
 const btnOpenMaps = document.getElementById('btn-open-maps');
 
-// === 1. LÓGICA DEL BOTÓN "NO" ===
+// === 1. LÓGICA DEL BOTÓN "NO" DESBUGEADA ===
 function moverBoton(e) {
-    if (e) e.preventDefault();
+    if (e) e.preventDefault(); // Detiene cualquier comportamiento raro del celular
 
     if (btnNo.style.position !== 'absolute') {
         btnNo.style.position = 'absolute';
@@ -27,8 +27,8 @@ function moverBoton(e) {
     btnNo.style.top = `${randomY}px`;
 }
 
-btnNo.addEventListener('touchstart', moverBoton);
-btnNo.addEventListener('pointerdown', moverBoton);
+// Separación limpia de eventos para evitar ejecuciones dobles en iOS/Android
+btnNo.addEventListener('touchstart', moverBoton, { passive: false });
 btnNo.addEventListener('mouseover', moverBoton);
 
 // === 2. ACCIÓN CUANDO DICE SÍ ===
@@ -45,7 +45,7 @@ btnOpenMaps.addEventListener('click', () => {
 
 // === 4. RECOLECTAR DATOS Y ENVIAR AL WHATSAPP ===
 detailsForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     const actividad = document.getElementById('actividad').value;
     const lugar = document.getElementById('lugar').value;
@@ -55,19 +55,23 @@ detailsForm.addEventListener('submit', (e) => {
 
     const tuTelefono = "50248012050"; 
 
-    // CORREGIDO: Enlace oficial de búsqueda en Google Maps con formato correcto
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // NUEVO MENSAJE: Más tierno, elaborado pero limpio y estructurado (minimalista)
-    const mensaje = `¡Siií, acepto! 🤭 Me encantaría que saliéramos. Esto es lo que pensé para nuestro día:\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
+    // NUEVA FRASE ACTUALIZADA: Dedicada a Adairsito
+    const mensaje = `Obvio que saldré contigo, como decirle no a Adairsito 🥰\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
-    
-    // Cambiado al formato universal corto 'wa.me' que evita fallos en navegadores locales
-    const urlWhatsApp = `https://wa.me/${tuTelefono}?text=${mensajeCodificado}`;
+    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${tuTelefono}&text=${mensajeCodificado}`;
 
-    // Redirección instantánea
-    window.location.href = urlWhatsApp;
+    // Enlace invisible infalible para saltarse bloqueos de GitHub Pages / Localhost
+    const enlaceInvisible = document.createElement('a');
+    enlaceInvisible.href = urlWhatsApp;
+    enlaceInvisible.target = '_self'; 
+    
+    document.body.appendChild(enlaceInvisible);
+    enlaceInvisible.click(); 
+    document.body.removeChild(enlaceInvisible);
 });
+
 
 
