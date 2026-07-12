@@ -1,4 +1,4 @@
-/* Estilos Globales - Anti Desbordamiento */
+/* Estilos Globales */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,6 +28,7 @@ body {
     width: 100%;
     max-width: 360px;
     border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative; /* Crucial para que el botón NO se quede dentro de la caja */
     z-index: 10;
     max-height: 95vh;
     overflow-y: auto;
@@ -52,7 +53,8 @@ h1 {
     justify-content: center;
     gap: 15px;
     align-items: center;
-    min-height: 50px;
+    min-height: 60px;
+    position: relative;
 }
 
 .btn {
@@ -69,19 +71,15 @@ h1 {
     background-color: #ff4b6e;
     color: white;
     box-shadow: 0 6px 15px rgba(255, 75, 110, 0.25);
-    transition: transform 0.2s, background-color 0.2s;
 }
-
-#btn-yes:active { transform: scale(0.95); }
 
 #btn-no {
     background-color: #edf2f7;
     color: #4a5568;
     border: 1px solid #e2e8f0;
     z-index: 1000;
-    transition: left 0.2s ease-out, top 0.2s ease-out; 
-    /* SOLUCIÓN AL BUG: Evita que el celular interfiera con el arrastre o selección del botón */
-    touch-action: none; 
+    transition: left 0.15s ease-out, top 0.15s ease-out; 
+    touch-action: none; /* Bloquea el scroll del celular al intentar tocarlo */
 }
 
 /* Formulario */
@@ -91,7 +89,7 @@ h1 {
 }
 
 .input-group {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     width: 100%;
 }
 
@@ -109,32 +107,17 @@ h1 {
     width: 100%;
 }
 
-/* SOLUCIÓN AL AMONTONAMIENTO: Distribución proporcional perfecta */
-.input-row-double {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-}
-
-.input-row-double .input-group {
-    flex: 1; /* Hace que fecha y hora midan exactamente el 50% cada uno */
-}
-
 .input-group input, .input-group textarea {
     width: 100%;
-    padding: 10px 12px;
+    padding: 11px 12px;
     border: 1px solid #cbd5e0;
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #2d3748;
     outline: none;
     background-color: #fff;
     resize: none;
-}
-
-.input-group textarea {
-    font-family: inherit;
-    line-height: 1.4;
+    -webkit-appearance: none; /* Reseteo visual para iOS Safari */
 }
 
 .input-group input:focus, .input-group textarea:focus {
@@ -156,8 +139,6 @@ h1 {
     gap: 4px;
     white-space: nowrap;
 }
-
-.btn-geo:hover { background-color: #cbd5e0; }
 
 #btn-send {
     width: 100%;
@@ -195,6 +176,7 @@ h1 {
     0% { opacity: 0; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
 }
+
 
 
 
