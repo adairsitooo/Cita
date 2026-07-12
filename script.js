@@ -3,8 +3,9 @@ const btnYes = document.getElementById('btn-yes');
 const proposalCard = document.getElementById('proposal-card');
 const loveCard = document.getElementById('love-card');
 const detailsForm = document.getElementById('details-form');
+const btnOpenMaps = document.getElementById('btn-open-maps');
 
-// === 1. LÓGICA PARA ESCAPAR DEL BOTÓN "NO" ===
+// === 1. LÓGICA DEL BOTÓN "NO" ===
 function moverBoton(e) {
     if (e) e.preventDefault();
 
@@ -12,7 +13,7 @@ function moverBoton(e) {
         btnNo.style.position = 'absolute';
     }
 
-    const padding = 25; 
+    const padding = 20; 
     const maxX = window.innerWidth - btnNo.offsetWidth - padding;
     const maxY = window.innerHeight - btnNo.offsetHeight - padding;
 
@@ -37,27 +38,31 @@ btnYes.addEventListener('click', () => {
     btnNo.style.display = 'none'; 
 });
 
-// === 3. RECOLECTAR DATOS Y ENVIAR CON UN MENSAJE ===
-detailsForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Evita que se recargue la página
+// === 3. ASISTENTE DE GOOGLE MAPS ===
+btnOpenMaps.addEventListener('click', () => {
+    // Abre Google Maps en una pestaña nueva para que la persona pueda ver o buscar el lugar fácilmente
+    window.open('https://www.google.com/maps', '_blank');
+});
 
-    // Capturar las respuestas ingresadas
+// === 4. RECOLECTAR DATOS Y ENVIAR MENSAJE MINIMALISTA ===
+detailsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
     const lugar = document.getElementById('lugar').value;
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
 
-    // Tu número de teléfono configurado correctamente
     const tuTelefono = "50248012050"; 
 
-    // Estructurar el mensaje bonito
-    const mensaje = `¡Hola! 💘 Acepto salir contigo. Aquí están los detalles para nuestra cita:\n\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}`;
-    
-    // Codificar el texto para que el navegador lo entienda en una URL
-    const mensajeCodificado = encodeURIComponent(mensaje);
+    // Generamos un enlace de búsqueda directa en Google Maps con el sitio que escribieron
+    const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // Crear el enlace directo a tu chat de WhatsApp
+    // Mensaje ultra-minimalista solicitado
+    const mensaje = `¡Cita Confirmada! 🥂\n\n📍 Lugar: ${lugar}\n🗺️ Mapa: ${enlaceGoogleMaps}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}`;
+    
+    const mensajeCodificado = encodeURIComponent(mensaje);
     const urlWhatsApp = `https://api.whatsapp.com/send?phone=${tuTelefono}&text=${mensajeCodificado}`;
 
-    // SOLUCIÓN: Redirige la pestaña actual para saltarse el bloqueo de pop-ups en localhost
+    // Redirección directa sin bloqueos de localhost
     window.location.href = urlWhatsApp;
 });
