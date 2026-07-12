@@ -43,11 +43,10 @@ btnOpenMaps.addEventListener('click', () => {
     window.open('https://www.google.com/maps', '_blank');
 });
 
-// === 4. RECOLECTAR DATOS Y ENVIAR MENSAJE MINIMALISTA ===
+// === 4. RECOLECTAR DATOS Y ENVIAR AL WHATSAPP ===
 detailsForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Captura de los nuevos campos incorporados
     const actividad = document.getElementById('actividad').value;
     const lugar = document.getElementById('lugar').value;
     const fecha = document.getElementById('fecha').value;
@@ -56,16 +55,19 @@ detailsForm.addEventListener('submit', (e) => {
 
     const tuTelefono = "50248012050"; 
 
-    // Genera un enlace de búsqueda directa y oficial en Google Maps con lo que ella escribió
+    // CORREGIDO: Enlace oficial de búsqueda en Google Maps con formato correcto
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // Estructura del mensaje limpio y minimalista
-    const mensaje = `¡Cita Confirmada! 🥂\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n🗺️ Mapa: ${enlaceGoogleMaps}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n\n💬 Mensaje: ${mensajePersonal}`;
+    // NUEVO MENSAJE: Más tierno, elaborado pero limpio y estructurado (minimalista)
+    const mensaje = `¡Siií, acepto! 🤭 Me encantaría que saliéramos. Esto es lo que pensé para nuestro día:\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
-    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${tuTelefono}&text=${mensajeCodificado}`;
+    
+    // Cambiado al formato universal corto 'wa.me' que evita fallos en navegadores locales
+    const urlWhatsApp = `https://wa.me/${tuTelefono}?text=${mensajeCodificado}`;
 
-    // Redirección directa sin bloqueos
+    // Redirección instantánea
     window.location.href = urlWhatsApp;
 });
+
 
