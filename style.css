@@ -1,0 +1,170 @@
+/* Estilos Globales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ffe5ec 0%, #fff0f3 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* Diseño de las Tarjetas */
+.card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    padding: 35px 25px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(255, 75, 110, 0.12);
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    transition: all 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    z-index: 10;
+}
+
+h1 {
+    color: #2d3748;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de Botones (Sí / No) */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    min-height: 60px;
+}
+
+/* Estilo de los Botones */
+.btn {
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    outline: none;
+}
+
+#btn-yes {
+    background-color: #ff4b6e;
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 75, 110, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#btn-yes:active { transform: scale(0.95); }
+#btn-yes:hover { background-color: #ff3358; }
+
+#btn-no {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    z-index: 1000;
+    transition: left 0.2s ease-out, top 0.2s ease-out; 
+}
+
+/* Formulario de Cita */
+#details-form {
+    text-align: left;
+    margin-top: 15px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #2d3748;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #ff4b6e;
+    box-shadow: 0 0 0 3px rgba(255, 75, 110, 0.15);
+}
+
+/* Botón de Enviar WhatsApp */
+#btn-send {
+    width: 100%;
+    background-color: #25d366;
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.25);
+    transition: background-color 0.2s;
+}
+
+#btn-send:hover {
+    background-color: #20ba5a;
+}
+
+/* Estados Ocultos y Animaciones */
+.hidden {
+    display: none !important;
+}
+
+#love-card {
+    background: white;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#love-card h1 {
+    color: #ff4b6e;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.heart-icon {
+    font-size: 3.5rem;
+    color: #ff4b6e;
+    margin-bottom: 10px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.15); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}

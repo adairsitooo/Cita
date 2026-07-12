@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Pregunta Importante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="proposal-card" class="card">
+        <h1>¿Quisieras salir conmigo?</h1>
+        <div class="btn-container">
+            <button id="btn-yes" class="btn">Sí</button>
+            <button id="btn-no" class="btn">No</button>
+        </div>
+    </div>
+
+    <div id="love-card" class="card hidden">
+        <div class="heart-icon">❤️</div>
+        <h1>¡Sabía que dirías que sí!</h1>
+        <p class="subtitle">Propón los detalles para nuestra cita:</p>
+        
+        <form id="details-form">
+            <div class="input-group">
+                <label for="lugar">¿A dónde te gustaría ir?</label>
+                <input type="text" id="lugar" placeholder="Ej: Un café, el cine, restaurante..." required>
+            </div>
+            
+            <div class="input-group">
+                <label for="fecha">¿Qué día?</label>
+                <input type="date" id="fecha" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="hora">¿A qué hora?</label>
+                <input type="time" id="hora" required>
+            </div>
+            
+            <button type="submit" id="btn-send" class="btn">Enviar detalles por WhatsApp</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
