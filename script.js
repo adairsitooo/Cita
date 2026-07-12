@@ -5,26 +5,25 @@ const loveCard = document.getElementById('love-card');
 const detailsForm = document.getElementById('details-form');
 const btnOpenMaps = document.getElementById('btn-open-maps');
 
-// === 1. LÓGICA DEL BOTÓN "NO" LIBERADO A TODA LA PÁGINA ===
+// === 1. LÓGICA DEL BOTÓN "NO" LIBERADO A LA PÁGINA COMPLETA ===
 function moverBoton(e) {
     if (e) e.preventDefault(); 
 
-    // 🔥 TRUCO MAESTRO: Si el botón sigue dentro de la tarjeta, lo sacamos al 'body' mundial
-    if (btnNo.parentNode !== document.body) {
-        document.body.appendChild(btnNo);
-        btnNo.style.position = 'fixed'; // Se vuelve independiente a la tarjeta
-        btnNo.style.zIndex = '9999';   // Por encima de absolutamente todo
+    // Al activarse, se vuelve de posición fija respecto a TODA la pantalla visible
+    if (btnNo.style.position !== 'fixed') {
+        btnNo.style.position = 'fixed';
+        btnNo.style.zIndex = '9999';
     }
 
     const padding = 25; 
-    // Ahora los límites calculan el ancho y alto de toda la PÁGINA visible
+    // Ahora calcula los límites reales del marco de la pantalla del celular o PC
     const maxX = window.innerWidth - btnNo.offsetWidth - padding;
     const maxY = window.innerHeight - btnNo.offsetHeight - padding;
 
     const limiteX = maxX > padding ? maxX : padding;
     const limiteY = maxY > padding ? maxY : padding;
 
-    // Coordenadas aleatorias libres por toda la pantalla
+    // Posiciones aleatorias por cualquier rincón de la pantalla
     const randomX = Math.floor(Math.random() * (limiteX - padding)) + padding;
     const randomY = Math.floor(Math.random() * (limiteY - padding)) + padding;
 
@@ -58,9 +57,11 @@ detailsForm.addEventListener('submit', (e) => {
     const mensajePersonal = document.getElementById('mensaje-personal').value;
 
     const tuTelefono = "50248012050"; 
+    
+    // Enlace universal de búsqueda corregido para Google Maps
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // Mensaje dedicado a Adairsito con saltos de línea limpios
+    // Mensaje personalizado exacto
     const mensaje = `Obvio que saldré contigo, como decirle no a Adairsito 🥰\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
