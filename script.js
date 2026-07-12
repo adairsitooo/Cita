@@ -5,23 +5,26 @@ const loveCard = document.getElementById('love-card');
 const detailsForm = document.getElementById('details-form');
 const btnOpenMaps = document.getElementById('btn-open-maps');
 
-// === 1. LÓGICA DEL BOTÓN "NO" INTERNA EN LA CAJA ===
+// === 1. LÓGICA DEL BOTÓN "NO" LIBERADO A TODA LA PÁGINA ===
 function moverBoton(e) {
     if (e) e.preventDefault(); 
 
-    if (btnNo.style.position !== 'absolute') {
-        btnNo.style.position = 'absolute';
+    // 🔥 TRUCO MAESTRO: Si el botón sigue dentro de la tarjeta, lo sacamos al 'body' mundial
+    if (btnNo.parentNode !== document.body) {
+        document.body.appendChild(btnNo);
+        btnNo.style.position = 'fixed'; // Se vuelve independiente a la tarjeta
+        btnNo.style.zIndex = '9999';   // Por encima de absolutamente todo
     }
 
-    // Usamos el tamaño de la tarjeta (proposalCard) en lugar de la pantalla completa
-    const padding = 15; 
-    const maxX = proposalCard.clientWidth - btnNo.offsetWidth - padding;
-    const maxY = proposalCard.clientHeight - btnNo.offsetHeight - padding;
+    const padding = 25; 
+    // Ahora los límites calculan el ancho y alto de toda la PÁGINA visible
+    const maxX = window.innerWidth - btnNo.offsetWidth - padding;
+    const maxY = window.innerHeight - btnNo.offsetHeight - padding;
 
     const limiteX = maxX > padding ? maxX : padding;
     const limiteY = maxY > padding ? maxY : padding;
 
-    // Coordenadas aleatorias pero atrapadas dentro de la tarjeta blanca
+    // Coordenadas aleatorias libres por toda la pantalla
     const randomX = Math.floor(Math.random() * (limiteX - padding)) + padding;
     const randomY = Math.floor(Math.random() * (limiteY - padding)) + padding;
 
@@ -57,7 +60,7 @@ detailsForm.addEventListener('submit', (e) => {
     const tuTelefono = "50248012050"; 
     const enlaceGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
 
-    // NUEVO MENSAJE SOLICITADO
+    // Mensaje dedicado a Adairsito con saltos de línea limpios
     const mensaje = `Obvio que saldré contigo, como decirle no a Adairsito 🥰\n\n✨ Plan: ${actividad}\n📍 Lugar: ${lugar}\n📅 Fecha: ${fecha}\n⏰ Hora: ${hora}\n🗺️ Ubicación: ${enlaceGoogleMaps}\n\n💌 Nota para ti: "${mensajePersonal}"`;
     
     const mensajeCodificado = encodeURIComponent(mensaje);
